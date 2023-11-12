@@ -3,7 +3,7 @@ let game_on = false
 let btn_disable = true
 let level = 1
 let user_sequence = []
-const game_sequence = []
+let game_sequence = []
 const delay = 500
 
 const green = document.getElementById("green")
@@ -35,9 +35,15 @@ const startGame = () => {
     setTimeout(startSequence, 500)
 }
 const endGame = () => {
+    restoreDefaultParams()
+    titleRefresh()
+}
+const restoreDefaultParams = () => {
     game_on = false
     btn_disable = true
     level = 1
+    game_sequence = []
+    user_sequence = []
 }
 
 const playWrongAudio = () => wrong_audio.play()
@@ -59,19 +65,19 @@ const handleOnClick = (i) => {
 }
 const onGreenClick = () => {
     if (btn_disable) return
-    handleOnClick(i)
+    handleOnClick(0)
 }
 const onRedClick = () => {
     if (btn_disable) return
-    handleOnClick(i)
+    handleOnClick(1)
 }
 const onYellowClick = () => {
     if (btn_disable) return
-    handleOnClick(i)
+    handleOnClick(2)
 }
 const onBlueClick = () => {
     if (btn_disable) return
-    handleOnClick(i)
+    handleOnClick(3)
 }
 const pressedAnimation = (i) => {
     btn_list[i].classList.toggle("pressed")
@@ -100,6 +106,8 @@ const checkUserAnswer = (anw) => {
 }
 const nextLevel = () => {
     if (user_sequence.length != game_sequence.length) return
+
+    user_sequence = []
     btn_disable = true
     level++
     titleRefresh()
