@@ -45,10 +45,8 @@ const restoreDefaultParams = () => {
     game_sequence = []
     user_sequence = []
 }
-
 const playWrongAudio = () => wrong_audio.play()
 const playBtnAudio = (i) => {
-    console.log("hi")
     pressedAnimation(i)
     if (i == 0) green_audio.play()
     else if (i == 1) red_audio.play()
@@ -94,12 +92,7 @@ const titleRefresh = () => {
 const pushNextSequence = () => game_sequence.push(Math.floor(Math.random() * 4))
 const startSequence = () => {
     pushNextSequence()
-    // Same logic as video
     playBtnAudio(game_sequence[game_sequence.length - 1])
-    // This is to play the whole new sequence every time
-    // for (let i = 0; i < game_sequence.length; i++) {
-    //     setTimeout(() => playBtnAudio(game_sequence[i]), i * delay)
-    // }
     btn_disable = false
 }
 const compareSequencesAtIndex = (i) => user_sequence[i] == game_sequence[i]
@@ -108,12 +101,14 @@ const checkUserAnswer = (anw) => {
     pushUserSequence(anw)
     return compareSequencesAtIndex(user_sequence.length - 1)
 }
-const nextLevel = () => {
-    if (user_sequence.length != game_sequence.length) return
-
+const handleNextLevel = () => {
     user_sequence = []
     btn_disable = true
     level++
+}
+const nextLevel = () => {
+    if (user_sequence.length != game_sequence.length) return
+    handleNextLevel()
     titleRefresh()
     setTimeout(startSequence, delay)
 }
