@@ -4,7 +4,7 @@ let btn_disable = true
 let level = 1
 let user_sequence = []
 let game_sequence = []
-const delay = 500
+const delay = 600
 
 const green = document.getElementById("green")
 const red = document.getElementById("red")
@@ -32,7 +32,7 @@ document.getElementsByTagName("body")[0].addEventListener("keypress", () => {
 const startGame = () => {
     game_on = true
     titleRefresh()
-    setTimeout(startSequence, 500)
+    setTimeout(startSequence, delay)
 }
 const endGame = () => {
     restoreDefaultParams()
@@ -48,6 +48,7 @@ const restoreDefaultParams = () => {
 
 const playWrongAudio = () => wrong_audio.play()
 const playBtnAudio = (i) => {
+    console.log("hi")
     pressedAnimation(i)
     if (i == 0) green_audio.play()
     else if (i == 1) red_audio.play()
@@ -93,8 +94,8 @@ const titleRefresh = () => {
 const pushNextSequence = () => game_sequence.push(Math.floor(Math.random() * 4))
 const startSequence = () => {
     pushNextSequence()
-    for (const i of game_sequence) {
-        setTimeout(playBtnAudio(i), i * 500)
+    for (let i = 0; i < game_sequence.length; i++) {
+        setTimeout(() => playBtnAudio(game_sequence[i]), i * delay)
     }
     btn_disable = false
 }
@@ -111,7 +112,7 @@ const nextLevel = () => {
     btn_disable = true
     level++
     titleRefresh()
-    setTimeout(startSequence, 500)
+    setTimeout(startSequence, delay)
 }
 // adding event listeners
 green.addEventListener("click", onGreenClick)
