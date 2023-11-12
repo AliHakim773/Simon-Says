@@ -1,12 +1,14 @@
 // variables
 let game_on = false
 let level = 1
+const game_sequence = []
 
 const level_title = document.getElementById("level-title")
 const green = document.getElementById("green")
 const red = document.getElementById("red")
 const yellow = document.getElementById("yellow")
 const blue = document.getElementById("blue")
+const container = document.getElementsByClassName("container")[0]
 
 const wrong_audio = new Audio("./sounds/wrong.mp3")
 const green_audio = new Audio("./sounds/green.mp3")
@@ -14,12 +16,14 @@ const yellow_audio = new Audio("./sounds/yellow.mp3")
 const red_audio = new Audio("./sounds/red.mp3")
 const blue_audio = new Audio("./sounds/blue.mp3")
 
-const startGame = () => (game_on = true)
+const startGame = () => {
+    game_on = true
+    pushNextSequence()
+}
 const endGame = () => {
     game_on = false
     level = 1
 }
-
 const onGreenClick = () => {
     if (!game_on) return
     green_audio.play()
@@ -41,10 +45,12 @@ const titleRefresh = () => {
         level_title.innerHTML = "Level " + level
     } else level_title.innerHTML = "Game Over, Press Any Key To Restart"
 }
+const pushNextSequence = () => game_sequence.push(Math.floor(Math.random() * 4))
 
 document.getElementsByTagName("body")[0].addEventListener("keypress", () => {
     if (!game_on) {
         startGame()
+        titleRefresh()
     }
 })
 green.addEventListener("click", onGreenClick)
