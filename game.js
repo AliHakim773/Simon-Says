@@ -48,45 +48,30 @@ const playBtnAudio = (i) => {
     else if (i == 2) yellow_audio.play()
     else if (i == 3) blue_audio.play()
 }
-const onGreenClick = () => {
-    if (btn_disable) return
-    if (checkUserAnswer(0)) {
-        playBtnAudio(0)
+const handleOnClick = (i) => {
+    if (checkUserAnswer(i)) {
+        playBtnAudio(i)
         nextLevel()
     } else {
         playWrongAudio()
         endGame()
     }
+}
+const onGreenClick = () => {
+    if (btn_disable) return
+    handleOnClick(i)
 }
 const onRedClick = () => {
     if (btn_disable) return
-    if (checkUserAnswer(1)) {
-        playBtnAudio(1)
-        nextLevel()
-    } else {
-        playWrongAudio()
-        endGame()
-    }
+    handleOnClick(i)
 }
 const onYellowClick = () => {
     if (btn_disable) return
-    if (checkUserAnswer(2)) {
-        playBtnAudio(2)
-        nextLevel()
-    } else {
-        playWrongAudio()
-        endGame()
-    }
+    handleOnClick(i)
 }
 const onBlueClick = () => {
     if (btn_disable) return
-    if (checkUserAnswer(3)) {
-        playBtnAudio(3)
-        nextLevel()
-    } else {
-        playWrongAudio()
-        endGame()
-    }
+    handleOnClick(i)
 }
 const pressedAnimation = (i) => {
     btn_list[i].classList.toggle("pressed")
