@@ -94,9 +94,12 @@ const titleRefresh = () => {
 const pushNextSequence = () => game_sequence.push(Math.floor(Math.random() * 4))
 const startSequence = () => {
     pushNextSequence()
-    for (let i = 0; i < game_sequence.length; i++) {
-        setTimeout(() => playBtnAudio(game_sequence[i]), i * delay)
-    }
+    // Same logic as video
+    playBtnAudio(game_sequence[game_sequence.length - 1])
+    // This is to play the whole new sequence every time
+    // for (let i = 0; i < game_sequence.length; i++) {
+    //     setTimeout(() => playBtnAudio(game_sequence[i]), i * delay)
+    // }
     btn_disable = false
 }
 const compareSequencesAtIndex = (i) => user_sequence[i] == game_sequence[i]
