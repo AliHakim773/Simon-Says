@@ -53,7 +53,7 @@ const onGreenClick = () => {
     if (btn_disable) return
     if (checkUserAnswer(0)) {
         playGreenAudio()
-        user_sequence.length == game_sequence.length ? nextLevel()
+        if (user_sequence.length == game_sequence.length) nextLevel()
     } else {
         playWrongAudio()
         endGame()
@@ -63,7 +63,7 @@ const onRedClick = () => {
     if (btn_disable) return
     if (checkUserAnswer(1)) {
         playRedAudio()
-        user_sequence.length == game_sequence.length ? nextLevel()
+        if (user_sequence.length == game_sequence.length) nextLevel()
     } else {
         playWrongAudio()
         endGame()
@@ -73,7 +73,7 @@ const onYellowClick = () => {
     if (btn_disable) return
     if (checkUserAnswer(2)) {
         playYellowAudio()
-        user_sequence.length == game_sequence.length ? nextLevel()
+        if (user_sequence.length == game_sequence.length) nextLevel()
     } else {
         playWrongAudio()
         endGame()
@@ -83,7 +83,7 @@ const onBlueClick = () => {
     if (btn_disable) return
     if (checkUserAnswer(3)) {
         playBlueAudio()
-        user_sequence.length == game_sequence.length ? nextLevel()
+        if (user_sequence.length == game_sequence.length) nextLevel()
     } else {
         playWrongAudio()
         endGame()
