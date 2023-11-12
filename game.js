@@ -6,11 +6,12 @@ let user_sequence = []
 const game_sequence = []
 const delay = 500
 
-const level_title = document.getElementById("level-title")
 const green = document.getElementById("green")
 const red = document.getElementById("red")
 const yellow = document.getElementById("yellow")
 const blue = document.getElementById("blue")
+
+const level_title = document.getElementById("level-title")
 const container = document.getElementsByClassName("container")[0]
 
 const wrong_audio = new Audio("./sounds/wrong.mp3")
@@ -51,9 +52,10 @@ const playAudio = (i) => {
 }
 const onGreenClick = () => {
     if (btn_disable) return
+    pressedAnimation(green)
     if (checkUserAnswer(0)) {
         playGreenAudio()
-        if (user_sequence.length == game_sequence.length) nextLevel()
+        nextLevel()
     } else {
         playWrongAudio()
         endGame()
@@ -61,9 +63,10 @@ const onGreenClick = () => {
 }
 const onRedClick = () => {
     if (btn_disable) return
+    pressedAnimation(red)
     if (checkUserAnswer(1)) {
         playRedAudio()
-        if (user_sequence.length == game_sequence.length) nextLevel()
+        nextLevel()
     } else {
         playWrongAudio()
         endGame()
@@ -71,9 +74,10 @@ const onRedClick = () => {
 }
 const onYellowClick = () => {
     if (btn_disable) return
+    pressedAnimation(yellow)
     if (checkUserAnswer(2)) {
         playYellowAudio()
-        if (user_sequence.length == game_sequence.length) nextLevel()
+        nextLevel()
     } else {
         playWrongAudio()
         endGame()
@@ -81,13 +85,20 @@ const onYellowClick = () => {
 }
 const onBlueClick = () => {
     if (btn_disable) return
+    pressedAnimation(blue)
     if (checkUserAnswer(3)) {
         playBlueAudio()
-        if (user_sequence.length == game_sequence.length) nextLevel()
+        nextLevel()
     } else {
         playWrongAudio()
         endGame()
     }
+}
+const pressedAnimation = (btn) => {
+    btn.classList.toggle("pressed")
+    setTimeout(() => {
+        btn.classList.toggle("pressed")
+    }, 100)
 }
 const titleRefresh = () => {
     if (game_on) {
@@ -109,6 +120,7 @@ const checkUserAnswer = (anw) => {
     return compareSequencesAtIndex(user_sequence.length - 1)
 }
 const nextLevel = () => {
+    if (user_sequence.length != game_sequence.length) return
     btn_disable = true
     level++
     titleRefresh()
