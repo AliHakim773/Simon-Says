@@ -10,6 +10,7 @@ const green = document.getElementById("green")
 const red = document.getElementById("red")
 const yellow = document.getElementById("yellow")
 const blue = document.getElementById("blue")
+const btn_list = [green, red, yellow, blue]
 
 const level_title = document.getElementById("level-title")
 const container = document.getElementsByClassName("container")[0]
@@ -40,21 +41,17 @@ const endGame = () => {
 }
 
 const playWrongAudio = () => wrong_audio.play()
-const playGreenAudio = () => green_audio.play()
-const playRedAudio = () => red_audio.play()
-const playYellowAudio = () => yellow_audio.play()
-const playBlueAudio = () => blue_audio.play()
-const playAudio = (i) => {
-    if (i == 0) playGreenAudio()
-    else if (i == 1) playRedAudio()
-    else if (i == 2) playYellowAudio()
-    else if (i == 3) playBlueAudio()
+const playBtnAudio = (i) => {
+    pressedAnimation(i)
+    if (i == 0) green_audio.play()
+    else if (i == 1) red_audio.play()
+    else if (i == 2) yellow_audio.play()
+    else if (i == 3) blue_audio.play()
 }
 const onGreenClick = () => {
     if (btn_disable) return
-    pressedAnimation(green)
     if (checkUserAnswer(0)) {
-        playGreenAudio()
+        playBtnAudio(0)
         nextLevel()
     } else {
         playWrongAudio()
@@ -63,9 +60,8 @@ const onGreenClick = () => {
 }
 const onRedClick = () => {
     if (btn_disable) return
-    pressedAnimation(red)
     if (checkUserAnswer(1)) {
-        playRedAudio()
+        playBtnAudio(1)
         nextLevel()
     } else {
         playWrongAudio()
@@ -74,9 +70,8 @@ const onRedClick = () => {
 }
 const onYellowClick = () => {
     if (btn_disable) return
-    pressedAnimation(yellow)
     if (checkUserAnswer(2)) {
-        playYellowAudio()
+        playBtnAudio(2)
         nextLevel()
     } else {
         playWrongAudio()
@@ -85,19 +80,18 @@ const onYellowClick = () => {
 }
 const onBlueClick = () => {
     if (btn_disable) return
-    pressedAnimation(blue)
     if (checkUserAnswer(3)) {
-        playBlueAudio()
+        playBtnAudio(3)
         nextLevel()
     } else {
         playWrongAudio()
         endGame()
     }
 }
-const pressedAnimation = (btn) => {
-    btn.classList.toggle("pressed")
+const pressedAnimation = (i) => {
+    btn_list[i].classList.toggle("pressed")
     setTimeout(() => {
-        btn.classList.toggle("pressed")
+        btn_list[i].classList.toggle("pressed")
     }, 100)
 }
 const titleRefresh = () => {
@@ -109,7 +103,7 @@ const pushNextSequence = () => game_sequence.push(Math.floor(Math.random() * 4))
 const startSequence = () => {
     pushNextSequence()
     for (const i of game_sequence) {
-        setTimeout(playAudio(i), i * 500)
+        setTimeout(playBtnAudio(i), i * 500)
     }
     btn_disable = false
 }
