@@ -1,8 +1,10 @@
 // variables
 let game_on = false
+let btn_disable = true
 let level = 1
-const delay = 500
+let user_sequence = []
 const game_sequence = []
+const delay = 500
 
 const level_title = document.getElementById("level-title")
 const green = document.getElementById("green")
@@ -17,11 +19,19 @@ const yellow_audio = new Audio("./sounds/yellow.mp3")
 const red_audio = new Audio("./sounds/red.mp3")
 const blue_audio = new Audio("./sounds/blue.mp3")
 
+// where everything start
+document.getElementsByTagName("body")[0].addEventListener("keypress", () => {
+    if (!game_on) {
+        startGame()
+    }
+})
+
+// functions definition
 const startGame = () => {
     game_on = true
     titleRefresh()
     pushNextSequence()
-    startSequence()
+    setTimeout(startSequence, 500)
 }
 const endGame = () => {
     game_on = false
@@ -38,19 +48,19 @@ const playAudio = (i) => {
     else if (i == 3) playBlueAudio()
 }
 const onGreenClick = () => {
-    if (!game_on) return
+    if (btn_disable) return
     playGreenAudio()
 }
 const onRedClick = () => {
-    if (!game_on) return
+    if (btn_disable) return
     playRedAudio()
 }
 const onYellowClick = () => {
-    if (!game_on) return
+    if (btn_disable) return
     playYellowAudio()
 }
 const onBlueClick = () => {
-    if (!game_on) return
+    if (btn_disable) return
     playBlueAudio()
 }
 const titleRefresh = () => {
@@ -59,16 +69,20 @@ const titleRefresh = () => {
     } else level_title.innerHTML = "Game Over, Press Any Key To Restart"
 }
 const pushNextSequence = () => game_sequence.push(Math.floor(Math.random() * 4))
+const pushUserSequence = (seq) => user_sequence.push(seq)
 const startSequence = () => {
     for (const i of game_sequence) {
-        setTimeout(playAudio(i), i * 100)
+        setTimeout(playAudio(i), i * 500)
     }
+    btn_disable = false
 }
-document.getElementsByTagName("body")[0].addEventListener("keypress", () => {
-    if (!game_on) {
-        startGame()
-    }
-})
+const compareSequencesAtIndex = (i) => user_sequence[i] == game_sequence[i]
+const checkUserAnswer = (anw) => {
+    pushUserSequence(anw)
+    return compareSequencesAtIndex(user_sequence.length - 1)
+}
+
+// adding event listeners
 green.addEventListener("click", onGreenClick)
 red.addEventListener("click", onRedClick)
 yellow.addEventListener("click", onYellowClick)
