@@ -30,13 +30,15 @@ document.getElementsByTagName("body")[0].addEventListener("keypress", () => {
 const startGame = () => {
     game_on = true
     titleRefresh()
-    pushNextSequence()
     setTimeout(startSequence, 500)
 }
 const endGame = () => {
     game_on = false
+    btn_disable = true
     level = 1
 }
+
+const playWrongAudio = () => wrong_audio.play()
 const playGreenAudio = () => green_audio.play()
 const playRedAudio = () => red_audio.play()
 const playYellowAudio = () => yellow_audio.play()
@@ -49,19 +51,43 @@ const playAudio = (i) => {
 }
 const onGreenClick = () => {
     if (btn_disable) return
-    playGreenAudio()
+    if (checkUserAnswer(0)) {
+        playGreenAudio()
+        user_sequence.length == game_sequence.length ? nextLevel()
+    } else {
+        playWrongAudio()
+        endGame()
+    }
 }
 const onRedClick = () => {
     if (btn_disable) return
-    playRedAudio()
+    if (checkUserAnswer(1)) {
+        playRedAudio()
+        user_sequence.length == game_sequence.length ? nextLevel()
+    } else {
+        playWrongAudio()
+        endGame()
+    }
 }
 const onYellowClick = () => {
     if (btn_disable) return
-    playYellowAudio()
+    if (checkUserAnswer(2)) {
+        playYellowAudio()
+        user_sequence.length == game_sequence.length ? nextLevel()
+    } else {
+        playWrongAudio()
+        endGame()
+    }
 }
 const onBlueClick = () => {
     if (btn_disable) return
-    playBlueAudio()
+    if (checkUserAnswer(3)) {
+        playBlueAudio()
+        user_sequence.length == game_sequence.length ? nextLevel()
+    } else {
+        playWrongAudio()
+        endGame()
+    }
 }
 const titleRefresh = () => {
     if (game_on) {
@@ -69,19 +95,25 @@ const titleRefresh = () => {
     } else level_title.innerHTML = "Game Over, Press Any Key To Restart"
 }
 const pushNextSequence = () => game_sequence.push(Math.floor(Math.random() * 4))
-const pushUserSequence = (seq) => user_sequence.push(seq)
 const startSequence = () => {
+    pushNextSequence()
     for (const i of game_sequence) {
         setTimeout(playAudio(i), i * 500)
     }
     btn_disable = false
 }
 const compareSequencesAtIndex = (i) => user_sequence[i] == game_sequence[i]
+const pushUserSequence = (seq) => user_sequence.push(seq)
 const checkUserAnswer = (anw) => {
     pushUserSequence(anw)
     return compareSequencesAtIndex(user_sequence.length - 1)
 }
-
+const nextLevel = () => {
+    btn_disable = true
+    level++
+    titleRefresh()
+    setTimeout(startSequence, 500)
+}
 // adding event listeners
 green.addEventListener("click", onGreenClick)
 red.addEventListener("click", onRedClick)
