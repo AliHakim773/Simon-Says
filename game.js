@@ -27,6 +27,11 @@ document.getElementsByTagName("body")[0].addEventListener("keypress", () => {
         startGame()
     }
 })
+// adding event listeners
+green.addEventListener("click", onGreenClick)
+red.addEventListener("click", onRedClick)
+yellow.addEventListener("click", onYellowClick)
+blue.addEventListener("click", onBlueClick)
 
 // functions definition
 const startGame = () => {
@@ -112,8 +117,3 @@ const nextLevel = () => {
     titleRefresh()
     setTimeout(startSequence, delay)
 }
-// adding event listeners
-green.addEventListener("click", onGreenClick)
-red.addEventListener("click", onRedClick)
-yellow.addEventListener("click", onYellowClick)
-blue.addEventListener("click", onBlueClick)
