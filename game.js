@@ -22,17 +22,11 @@ const red_audio = new Audio("./sounds/red.mp3")
 const blue_audio = new Audio("./sounds/blue.mp3")
 
 // where everything start
-document.getElementsByTagName("body")[0].addEventListener("keypress", () => {
+document.querySelectorAll("body")[0].addEventListener("keypress", () => {
     if (!game_on) {
         startGame()
     }
 })
-// adding event listeners
-green.addEventListener("click", onGreenClick)
-red.addEventListener("click", onRedClick)
-yellow.addEventListener("click", onYellowClick)
-blue.addEventListener("click", onBlueClick)
-
 // functions definition
 const startGame = () => {
     game_on = true
@@ -117,3 +111,8 @@ const nextLevel = () => {
     titleRefresh()
     setTimeout(startSequence, delay)
 }
+// adding event listeners
+green.addEventListener("click", onGreenClick)
+red.addEventListener("click", onRedClick)
+yellow.addEventListener("click", onYellowClick)
+blue.addEventListener("click", onBlueClick)
