@@ -1,20 +1,21 @@
-// variables
+// game variables
 let game_on = false
 let btn_disable = true
 let level = 1
 let user_sequence = []
 let game_sequence = []
 const delay = 600
-
+// button variables
 const green = document.getElementById("green")
 const red = document.getElementById("red")
 const yellow = document.getElementById("yellow")
 const blue = document.getElementById("blue")
 const btn_list = [green, red, yellow, blue]
-
+// html elements
+const body = document.querySelectorAll("body")[0]
 const level_title = document.getElementById("level-title")
-const container = document.getElementsByClassName("container")[0]
-
+const container = document.querySelectorAll(".container")[0]
+// aurdio varriables
 const wrong_audio = new Audio("./sounds/wrong.mp3")
 const green_audio = new Audio("./sounds/green.mp3")
 const yellow_audio = new Audio("./sounds/yellow.mp3")
@@ -22,7 +23,7 @@ const red_audio = new Audio("./sounds/red.mp3")
 const blue_audio = new Audio("./sounds/blue.mp3")
 
 // where everything start
-document.querySelectorAll("body")[0].addEventListener("keypress", () => {
+body.addEventListener("keypress", () => {
     if (!game_on) {
         startGame()
     }
