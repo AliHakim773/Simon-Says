@@ -14,7 +14,6 @@ const btn_list = [green, red, yellow, blue]
 // html elements
 const body = document.querySelectorAll("body")[0]
 const level_title = document.getElementById("level-title")
-const container = document.querySelectorAll(".container")[0]
 // aurdio varriables
 const wrong_audio = new Audio("./sounds/wrong.mp3")
 const green_audio = new Audio("./sounds/green.mp3")
