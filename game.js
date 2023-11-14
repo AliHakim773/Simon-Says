@@ -66,9 +66,8 @@ const pressedAnimation = (i) => {
     }, 100)
 }
 const titleRefresh = () => {
-    if (game_on) {
-        level_title.innerHTML = "Level " + level
-    } else level_title.innerHTML = "Game Over, Press Any Key To Restart"
+    if (game_on) level_title.innerHTML = `Level ${level}`
+    else level_title.innerHTML = "Game Over, Press Any Key To Restart"
 }
 const pushNextSequence = () => game_sequence.push(Math.floor(Math.random() * 4))
 const startSequence = () => {
