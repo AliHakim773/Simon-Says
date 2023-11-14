@@ -5,7 +5,6 @@ let level = 1
 let user_sequence = []
 let game_sequence = []
 const delay = 600
-// button variables
 // green: 0, red: 1, yellow: 2, Blue: 3
 const btn_list = document.querySelectorAll(".btn")
 // html elements
@@ -19,7 +18,6 @@ const audio_list = [
     new Audio("./sounds/blue.mp3"),
 ]
 const wrong_audio = new Audio("./sounds/wrong.mp3")
-
 // where everything start
 body.addEventListener("keypress", () => {
     if (!game_on) {
