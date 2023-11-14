@@ -58,21 +58,9 @@ const handleOnClick = (i) => {
         endGame()
     }
 }
-const onGreenClick = () => {
+const onBtnClick = (i) => {
     if (btn_disable) return
-    handleOnClick(0)
-}
-const onRedClick = () => {
-    if (btn_disable) return
-    handleOnClick(1)
-}
-const onYellowClick = () => {
-    if (btn_disable) return
-    handleOnClick(2)
-}
-const onBlueClick = () => {
-    if (btn_disable) return
-    handleOnClick(3)
+    handleOnClick(i)
 }
 const pressedAnimation = (i) => {
     btn_list[i].classList.toggle("pressed")
@@ -109,7 +97,6 @@ const nextLevel = () => {
     setTimeout(startSequence, delay)
 }
 // adding event listeners
-green.addEventListener("click", onGreenClick)
-red.addEventListener("click", onRedClick)
-yellow.addEventListener("click", onYellowClick)
-blue.addEventListener("click", onBlueClick)
+btn_list.forEach((btn, i) => {
+    btn.addEventListener("click", () => onBtnClick(i))
+})
