@@ -6,11 +6,8 @@ let user_sequence = []
 let game_sequence = []
 const delay = 600
 // button variables
-const green = document.getElementById("green")
-const red = document.getElementById("red")
-const yellow = document.getElementById("yellow")
-const blue = document.getElementById("blue")
-const btn_list = [green, red, yellow, blue]
+// green: 0, red: 1, yellow: 2, Blue: 3
+const btn_list = document.querySelectorAll(".btn")
 // html elements
 const body = document.querySelectorAll("body")[0]
 const level_title = document.getElementById("level-title")
