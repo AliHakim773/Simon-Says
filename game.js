@@ -12,11 +12,13 @@ const btn_list = document.querySelectorAll(".btn")
 const body = document.querySelectorAll("body")[0]
 const level_title = document.getElementById("level-title")
 // aurdio varriables
+const audio_list = [
+    new Audio("./sounds/green.mp3"),
+    new Audio("./sounds/yellow.mp3"),
+    new Audio("./sounds/red.mp3"),
+    new Audio("./sounds/blue.mp3"),
+]
 const wrong_audio = new Audio("./sounds/wrong.mp3")
-const green_audio = new Audio("./sounds/green.mp3")
-const yellow_audio = new Audio("./sounds/yellow.mp3")
-const red_audio = new Audio("./sounds/red.mp3")
-const blue_audio = new Audio("./sounds/blue.mp3")
 
 // where everything start
 body.addEventListener("keypress", () => {
@@ -44,10 +46,7 @@ const restoreDefaultParams = () => {
 const playWrongAudio = () => wrong_audio.play()
 const playBtnAudio = (i) => {
     pressedAnimation(i)
-    if (i == 0) green_audio.play()
-    else if (i == 1) red_audio.play()
-    else if (i == 2) yellow_audio.play()
-    else if (i == 3) blue_audio.play()
+    audio_list[i].play()
 }
 const handleOnClick = (i) => {
     if (checkUserAnswer(i)) {
